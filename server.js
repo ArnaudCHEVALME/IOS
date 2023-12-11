@@ -4,13 +4,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-require('dotenv').config()
+require("dotenv").config();
 
 const PORT = process.env.IOS_API_PORT;
+require("./routers/meeting_spot.router.js")(app);
 
 const db = require("./models");
 
-db.sequelize.sync({ force: true, logging: false })
+db.sequelize
+  .sync({ force: true, logging: false })
   .then(async () => {
     console.log("Synced db.");
     require("./seeders/meeting_spots.seeder.js");
