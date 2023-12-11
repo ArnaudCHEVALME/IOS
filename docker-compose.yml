@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: ${IOS_POSTGRES_PASSWORD}
       POSTGRES_USER: ${IOS_POSTGRES_USER}
       POSTGRES_DB: ${IOS_POSTGRES_DB}
+    networks:
+      - db
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
@@ -30,6 +32,7 @@ services:
         condition: service_healthy
     networks:
       - proxy
+      - db
 
   adminer:
     image: adminer
@@ -42,3 +45,4 @@ volumes:
 networks:
   proxy:
     external: true
+  db:
