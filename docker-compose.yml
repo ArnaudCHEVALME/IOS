@@ -28,6 +28,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - proxy
 
   adminer:
     image: adminer
@@ -37,3 +39,6 @@ services:
 
 volumes:
   db-data:
+networks:
+  proxy:
+    external: true
