@@ -4,7 +4,7 @@ const meetingSpotController = require('../controllers/meeting_spot.controller');
 
 module.exports = (app) => {
   router.get('/', meetingSpotController.getMeetingSpotList);
-  router.get('/:spot_id', meetingSpotController.getMeetingSpot);
+  router.get('/:spot_id', meetingSpotController.getMeetingSpotById);
 
   app.use('/meeting_spot', router);
 }
