@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const meetingSpotController = require('../controllers/meeting_spot.controller');
+const controller = require('../controllers/meeting_spot.controller');
 
 module.exports = (app) => {
-  router.get('/', meetingSpotController.getMeetingSpotList);
-  router.get('/:spot_id', meetingSpotController.getMeetingSpotById);
+  router.get('/', controller.getMeetingSpotList);
+  router.get('/:spot_id', controller.getMeetingSpotById);
 
   app.use('/meeting_spot', router);
 }
