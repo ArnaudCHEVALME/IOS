@@ -3,9 +3,9 @@ const { sequelize, MeetingSpot, Presences } = require('../models');
 const getMeetingSpotList = async (req, res) => {
   try {
     const meetingSpotList = await MeetingSpot.findAll();
-    res.status(200).json(meetingSpotList);
+    res.status(200).send(meetingSpotList);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 }
 const getMeetingSpotById = async (req, res) => {
@@ -22,9 +22,9 @@ const getMeetingSpotById = async (req, res) => {
         }
       ]
     });
-    res.status(200).json(meetingSpot);
+    res.status(200).send(meetingSpot);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 }
 
