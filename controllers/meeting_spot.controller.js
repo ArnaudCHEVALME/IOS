@@ -1,4 +1,4 @@
-const { sequelize, MeetingSpot, Presences } = require('../models');
+const { MeetingSpot, Users } = require('../models');
 
 const getMeetingSpotList = async (req, res) => {
   try {
@@ -8,6 +8,7 @@ const getMeetingSpotList = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 }
+
 const getMeetingSpotById = async (req, res) => {
   try {
     const { spot_id } = req.params;
@@ -17,8 +18,12 @@ const getMeetingSpotById = async (req, res) => {
       },
       include: [
         {
-          model: User,
+          model: Users,
           as: 'users',
+          attributes: ['id', 'firstname', 'lastname', 'bio', 'avatar_path'],
+          through: {
+            attributes: []
+          }
         }
       ]
     });
