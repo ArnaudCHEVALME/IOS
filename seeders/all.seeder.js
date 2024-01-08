@@ -15,6 +15,7 @@ const seedMeetingSpots = async () => {
         name: `Meeting Spot ${i}`,
         latitude,
         longitude,
+        image_path: 'bar.png',
       }));
     }
 
