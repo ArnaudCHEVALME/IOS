@@ -101,8 +101,6 @@ const seedUsers = async () => {
       users.push(Users.create({
         firstname: getRandomFirstname(),
         lastname: getRandomLastname(),
-        username: `user${i}`,
-        password: `user${i}`,
         bio: `bio ${i}`,
         avatar_path: `https://ios.allbyte.fr/avatar/${avatar_path}`,
       }));

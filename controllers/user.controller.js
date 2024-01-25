@@ -21,23 +21,20 @@ const getAll = async (req, res) => {
 
 const simpleLogin = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await Users.findOne({
+    const { firstname, lastname } = req.body;
+    let user = await Users.findOne({
       where: {
-        username: username,
+        firstname,
+        lastname,
       }
     })
     if (!user) {
-      const newUser = await Users.create({
-        username: username,
-        password: password,
+      user = await Users.create({
+        firstname,
+        lastname,
       });
-      res.status(200).send(newUser);
-    } else if (user.password !== password) {
-      res.status(401).send({ error: 'Wrong password' });
-    } else {
-      res.status(200).send(user);
     }
+    res.status(200).send(user);
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
