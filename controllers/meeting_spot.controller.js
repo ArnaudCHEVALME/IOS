@@ -33,7 +33,63 @@ const getMeetingSpotById = async (req, res) => {
   }
 }
 
+const addUserToMeetingSpot = async (req, res) => {
+  try {
+    const { spot_id, user_id } = req.body;
+    const meetingSpot = await MeetingSpot.findOne({
+      where: {
+        id: spot_id
+      }
+    });
+    const user = await Users.findOne({
+      where: {
+        id: user_id
+      }
+    });
+    if (!meetingSpot || !user) {
+      res.status(404).send({ error: 'User or meeting spot not found' });
+    } else if (meetingSpot.users.includes(user)) {
+      res.status(400).send({ error: 'User already in meeting spot' });
+    } else {
+      await meetingSpot.addUser(user);
+      res.status(200).send({ message: 'User added to meeting spot' });
+    }
+    await meetingSpot.addUser(user);
+    res.status(200).send({ message: 'User added to meeting spot' });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+}
+
+const removeUserFromMeetingSpot = async (req, res) => {
+  try {
+    const { spot_id, user_id } = req.body;
+    const meetingSpot = await MeetingSpot.findOne({
+      where: {
+        id: spot_id
+      }
+    });
+    const user = await Users.findOne({
+      where: {
+        id: user_id
+      }
+    });
+    if (!meetingSpot || !user) {
+      res.status(404).send({ error: 'User or meeting spot not found' });
+    } else if (!meetingSpot.users.includes(user)) {
+      res.status(400).send({ error: 'User not in meeting spot' });
+    } else {
+      await meetingSpot.removeUser(user);
+      res.status(200).send({ message: 'User removed from meeting spot' });
+    }
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+}
+
 module.exports = {
   getMeetingSpotList,
   getMeetingSpotById,
+  addUserToMeetingSpot,
+  removeUserFromMeetingSpot,
 };
