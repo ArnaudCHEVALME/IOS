@@ -32,7 +32,10 @@ const simpleLogin = async (req, res) => {
       user = await Users.create({
         firstname,
         lastname,
-      });
+      },
+        {
+          fields: ['id, firstname', 'lastname', 'bio', 'avatar_path']
+        });
     }
     res.status(200).send(user);
   } catch (error) {
