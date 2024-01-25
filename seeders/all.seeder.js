@@ -15,7 +15,7 @@ const seedMeetingSpots = async () => {
         name: `Meeting Spot ${i}`,
         latitude,
         longitude,
-        image_path: 'bar.png',
+        image_path: 'https://ios.allbyte.fr/avatar/bar.png',
       }));
     }
 
@@ -52,7 +52,7 @@ const seedUsers = async () => {
         firstname: `firstname ${i}`,
         lastname: `lastname ${i}`,
         bio: `bio ${i}`,
-        avatar_path,
+        avatar_path: `https://ios.allbyte.fr/avatar/${avatar_path}`,
       }));
     }
 
