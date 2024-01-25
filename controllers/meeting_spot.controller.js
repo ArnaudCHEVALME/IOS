@@ -20,7 +20,7 @@ const getMeetingSpotById = async (req, res) => {
         {
           model: Users,
           as: 'users',
-          attributes: ['id', 'firstname', 'lastname', 'bio', 'avatar_path'],
+          attributes: ['id', 'username', 'firstname', 'lastname', 'bio', 'avatar_path'],
           through: {
             attributes: []
           }
