@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false,
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     firstname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -21,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
     avatar_path: {
       type: DataTypes.TEXT,
       allowNull: true
-    }
-  })
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  });
 };

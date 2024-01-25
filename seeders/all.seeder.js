@@ -1,5 +1,47 @@
 const { MeetingSpot, Users } = require('../models');
 
+const firstnames = [
+  'John',
+  'Jane',
+  'Jack',
+  'Jill',
+  'James',
+  'Judy',
+  'Jenny',
+  'Jason',
+  'Jasmine',
+  'Jasper',
+  'Jared',
+  'Jade',
+  'Jocelyn',
+  'Jesse',
+  'Jenna',
+  'Javier',
+  'Jasmine',
+];
+
+const lastnames = [
+  'Smith',
+  'Johnson',
+  'Williams',
+  'Jones',
+  'Brown',
+  'Davis',
+  'Miller',
+  'Wilson',
+  'Moore',
+  'Taylor',
+  'Anderson',
+  'Thomas',
+  'Jackson',
+  'White',
+  'Harris',
+  'Martin',
+  'Thompson',
+  'Garcia'
+];
+
+
 const seedMeetingSpots = async () => {
   try {
     const meeting_spots_count = await MeetingSpot.count();
@@ -32,6 +74,14 @@ function getRandomCoordinate(min_latitude, max_latitude, min_longitude, max_long
   return { latitude, longitude };
 }
 
+function getRandomFirstname() {
+  return firstnames[Math.floor(Math.random() * firstnames.length)];
+}
+
+function getRandomLastname() {
+  return lastnames[Math.floor(Math.random() * lastnames.length)];
+}
+
 const seedUsers = async () => {
   try {
     const user_count = await Users.count();
@@ -49,8 +99,10 @@ const seedUsers = async () => {
 
     for (let i = 0; i < 100; i++) {
       users.push(Users.create({
-        firstname: `firstname ${i}`,
-        lastname: `lastname ${i}`,
+        firstname: getRandomFirstname(),
+        lastname: getRandomLastname(),
+        username: `user${i}`,
+        password: `user${i}`,
         bio: `bio ${i}`,
         avatar_path: `https://ios.allbyte.fr/avatar/${avatar_path}`,
       }));
