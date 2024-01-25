@@ -47,8 +47,29 @@ const addUserToMeetingSpot = async (req, res) => {
       }
     });
     if (!meetingSpot || !user) {
-      res.status(404).send({ error: 'User or meeting spot not found' });
-    } else if (meetingSpot.users.includes(user)) {
+      return res.status(404).send({ error: 'User or meeting spot not found' });
+    }
+
+    // find meetingSpots where the user is present
+    const occupiedMeetingSpot = await MeetingSpot.findAll({
+      include: [
+        {
+          model: Users,
+          as: 'users',
+          where: {
+            id: user_id
+          }
+        }
+      ]
+    });
+
+    if (occupiedMeetingSpot.length > 0) {
+      occupiedMeetingSpot.forEach(async (spot) => {
+        await spot.removeUser(user);
+      });
+    }
+
+    if (meetingSpot.users.includes(user)) {
       res.status(400).send({ error: 'User already in meeting spot' });
     } else {
       await meetingSpot.addUser(user);
