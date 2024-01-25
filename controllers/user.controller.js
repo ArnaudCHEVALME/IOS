@@ -22,6 +22,7 @@ const getAll = async (req, res) => {
 const simpleLogin = async (req, res) => {
   try {
     const { firstname, lastname } = req.body;
+
     let user = await Users.findOne({
       where: {
         firstname,
@@ -32,14 +33,11 @@ const simpleLogin = async (req, res) => {
     console.log(firstname, lastname);
     if (!user) {
       user = await Users.create({
-        firstname,
-        lastname,
+        firstname: firstname,
+        lastname: lastname,
         bio: '',
         avatar_path: '',
-      },
-        {
-          fields: ['id, firstname', 'lastname', 'bio', 'avatar_path']
-        });
+      });
     }
     res.status(200).send(user);
   } catch (error) {
