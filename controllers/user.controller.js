@@ -28,6 +28,8 @@ const simpleLogin = async (req, res) => {
         lastname,
       }
     })
+
+    console.log(firstname, lastname);
     if (!user) {
       user = await Users.create({
         firstname,
