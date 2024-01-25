@@ -28,12 +28,14 @@ const simpleLogin = async (req, res) => {
         lastname,
       }
     })
-
+    console.log(user);
     console.log(firstname, lastname);
     if (!user) {
       user = await Users.create({
         firstname,
         lastname,
+        bio: '',
+        avatar_path: '',
       },
         {
           fields: ['id, firstname', 'lastname', 'bio', 'avatar_path']
