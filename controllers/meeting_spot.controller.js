@@ -51,8 +51,16 @@ const addUserToMeetingSpot = async (req, res) => {
     }
 
     // find meetingSpots where the user is present
-    const occupiedMeetingSpot = await user.getMeetingSpots({
-      include: [Users],
+    const occupiedMeetingSpot = await MeetingSpot.findAll({
+      include: [
+        {
+          model: Users,
+          as: 'users',
+          where: {
+            id: user_id
+          }
+        }
+      ]
     });
 
     console.log(occupiedMeetingSpot);
