@@ -109,8 +109,6 @@ const removeUserFromMeetingSpot = async (req, res) => {
     console.log(meetingSpot);
     if (!meetingSpot || !user) {
       res.status(404).send({ error: 'User or meeting spot not found' });
-    } else if (!meetingSpot.users.includes(user)) {
-      res.status(400).send({ error: 'User not in meeting spot' });
     } else {
       await meetingSpot.removeUser(user);
       res.status(200).send({ message: 'User removed from meeting spot' });
