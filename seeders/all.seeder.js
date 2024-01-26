@@ -95,7 +95,7 @@ const seedUsers = async () => {
       'green.png'
     ]
 
-    const avatar_path = avatar_paths[Math.floor(Math.random() * avatar_paths.length)];
+    const avatar_path = avatar_paths[Math.round(Math.random())];
 
     for (let i = 0; i < 100; i++) {
       users.push(Users.create({
