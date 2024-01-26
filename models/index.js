@@ -30,8 +30,6 @@ db.Users = require('./users.model.js')(sequelize, DataTypes)
 db.MeetingSpot = require('./meeting_spots.model.js')(sequelize, DataTypes)
 // db.Company = require('./company.model.js')(sequelize, DataTypes)
 
-// db.Presences = require('./presences.model.js')(sequelize, DataTypes)
-
 db.Users.belongsToMany(db.MeetingSpot, {
   through: 'presences',
   foreignKey: 'user_id',
