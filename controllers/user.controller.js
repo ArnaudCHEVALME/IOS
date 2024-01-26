@@ -34,7 +34,7 @@ const simpleLogin = async (req, res) => {
         firstname: firstname,
         lastname: lastname,
         bio: '',
-        avatar_path: '',
+        avatar_path: 'https://ios.allbyte.fr/avatar/green.png',
       });
     }
     res.status(200).send(user);
