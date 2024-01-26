@@ -71,7 +71,8 @@ const addUserToMeetingSpot = async (req, res) => {
       });
     }
 
-    if (meetingSpot.users.includes(user)) {
+    console.log(meetingSpot.users);
+    if (meetingSpot?.users.includes(user)) {
       res.status(400).send({ error: 'User already in meeting spot' });
     } else {
       await meetingSpot.addUser(user);
