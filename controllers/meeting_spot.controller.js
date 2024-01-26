@@ -106,6 +106,7 @@ const removeUserFromMeetingSpot = async (req, res) => {
         id: user_id
       }
     });
+    console.log(meetingSpot);
     if (!meetingSpot || !user) {
       res.status(404).send({ error: 'User or meeting spot not found' });
     } else if (!meetingSpot.users.includes(user)) {
