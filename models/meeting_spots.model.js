@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     longitude: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
       allowNull: false,
     },
     latitude: {
-      type: DataTypes.STRING,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     image_path: {

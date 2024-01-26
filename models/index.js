@@ -28,18 +28,28 @@ db.sequelize = sequelize;
 
 db.Users = require('./users.model.js')(sequelize, DataTypes)
 db.MeetingSpot = require('./meeting_spots.model.js')(sequelize, DataTypes)
+// db.Company = require('./company.model.js')(sequelize, DataTypes)
 
-db.Presences = require('./presences.model.js')(sequelize, DataTypes)
+// db.Presences = require('./presences.model.js')(sequelize, DataTypes)
 
 db.Users.belongsToMany(db.MeetingSpot, {
-  through: db.Presences,
+  through: 'presences',
   foreignKey: 'user_id',
   otherKey: 'company_id'
 })
 db.MeetingSpot.belongsToMany(db.Users, {
-  through: db.Presences,
+  through: 'presences',
   foreignKey: 'company_id',
   otherKey: 'user_id'
 })
+
+// db.Users.belongsTo(db.Company, {
+//   foreignKey: 'company_id',
+//   as: 'company'
+// })
+// db.Company.hasMany(db.Users, {
+//   foreignKey: 'company_id',
+//   as: 'users'
+// })
 
 module.exports = db;

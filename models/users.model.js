@@ -21,6 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     avatar_path: {
       type: DataTypes.TEXT,
       allowNull: true
-    }
-  })
+    },
+  });
 };
