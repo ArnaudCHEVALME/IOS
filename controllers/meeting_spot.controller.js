@@ -51,7 +51,9 @@ const addUserToMeetingSpot = async (req, res) => {
     }
 
     // find meetingSpots where the user is present
-    const occupiedMeetingSpot = await user.getMeetingSpots();
+    const occupiedMeetingSpot = await user.getMeetingSpots({
+      include: [Users],
+    });
 
     console.log(occupiedMeetingSpot);
 
