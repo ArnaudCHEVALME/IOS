@@ -71,7 +71,7 @@ const addUserToMeetingSpot = async (req, res) => {
       });
     }
 
-    if (meetingSpot.users?.includes(user)) {
+    if (meetingSpot.users.includes(user)) {
       res.status(400).send({ error: 'User already in meeting spot' });
     } else {
       await meetingSpot.addUser(user);
@@ -90,8 +90,19 @@ const removeUserFromMeetingSpot = async (req, res) => {
     const meetingSpot = await MeetingSpot.findOne({
       where: {
         id: spot_id
-      }
+      },
+      include: [
+        {
+          model: Users,
+          as: 'users',
+          attributes: ['id', 'firstname', 'lastname', 'bio', 'avatar_path'],
+          through: {
+            attributes: []
+          }
+        }
+      ]
     });
+
     const user = await Users.findOne({
       where: {
         id: user_id
