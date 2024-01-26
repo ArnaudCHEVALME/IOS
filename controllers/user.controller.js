@@ -29,8 +29,6 @@ const simpleLogin = async (req, res) => {
         lastname,
       }
     })
-    console.log(user);
-    console.log(firstname, lastname);
     if (!user) {
       user = await Users.create({
         firstname: firstname,
@@ -45,8 +43,33 @@ const simpleLogin = async (req, res) => {
   }
 }
 
+const updateProfile = async (req, res) => {
+  try {
+    const { userId, firstName, lastName, bio } = req.body;
+
+    let user = await Users.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    user.firstname = firstName;
+    user.lastname = lastName;
+    user.bio = bio;
+
+    await user.save();
+
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+}
+
+
+
 module.exports = {
   getUserById,
   getAll,
   simpleLogin,
+  updateProfile,
 };
