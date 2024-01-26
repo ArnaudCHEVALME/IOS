@@ -75,9 +75,8 @@ const addUserToMeetingSpot = async (req, res) => {
       return res.status(400).send({ error: 'User already in meeting spot' });
     } else {
       await meetingSpot.addUser(user);
+      return res.status(200).send({ message: 'User added to meeting spot' });
     }
-    await meetingSpot.addUser(user);
-    res.status(200).send({ message: 'User added to meeting spot' });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
